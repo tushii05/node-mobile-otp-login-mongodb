@@ -4,8 +4,18 @@ const Twilio = require('twilio');
 const twilioPhoneNumber = 'your_twilio_phone_number';
 const client = Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
+// function generateOTP() {
+//     return Math.floor(100000 + Math.random() * 900000).toString();
+// }
+
 function generateOTP() {
-    return Math.floor(100000 + Math.random() * 900000).toString();
+    const otpLength = 6;
+    const digits = "0123456789";
+    let OTP = "";
+    for (let i = 0; i < otpLength; i++) {
+        OTP += digits[crypto.randomInt(0, digits.length)];
+    }
+    return OTP;
 }
 
 async function createUser(mobileNumber) {
